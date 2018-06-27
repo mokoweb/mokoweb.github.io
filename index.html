@@ -5,40 +5,55 @@
     <title>
         Currency Converter App
     </title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-	<script src="js/index.js" /></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+	
 </head>
 <body>
-
+<div>
 <form>
   <h1>My Currency Converter</h1>
   <div class="inset">
   <p>
-    <label for="email">Amount</label>
-    <input type="text" name="from" id="email">
+    <label for="amount">Amount</label>
+    <input type="number" name="from" id="amount">
   </p>
    <p>
-    <label for="from">From</label>
+    <label for="fdrom">From</label>
     
-    <select name="select" id="from" >
-      <option value="NGN">NGN</option>
+    <select name="from" id="currfrom" >
+      
     </select>
   </p>
   <p>
-    <label for="from">To</label>
+    <label for="frdom">To</label>
     
-    <select name="select" id="from" >
-      <option value="NGN">USD</option>
+    <select name="to" id="currto" >
+    
     </select>
   </p>
  <p>
-    <input type="text" name="from" id="email">
+    <input type="text" name="from" id="convertedCurrency">
+	
   </p>
   </div>
   <p class="p-container">
-    <input type="submit" name="go" id="go" value="Convert">
+	<button type="button" id="convertButton">Convert</button>
   </p>
 </form>
-
+</div>
+<script src="index.js" /></script>
+<script>
+if ('serviceWorker' in navigator) {
+ window.addEventListener('load', function() {
+   navigator.serviceWorker.register('./sw.js').then(function(registration) {
+     // Registration was successful
+     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+   }, function(err) {
+     // registration failed :disappointed:
+     console.log('ServiceWorker registration failed: ', err);
+   });
+ });
+}
+</script>
 </body>
 </html>
