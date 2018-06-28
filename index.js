@@ -7,10 +7,8 @@ const baseUrl = 'https://free.currencyconverterapi.com/api/v5/'
 document.getElementById('convertButton').addEventListener('click', computeConversion)
 
 function fetchCurrencies() {
-    fetch(`${baseUrl}currencies`)
-        .then(response => {
-            return response.json()
-    }).then(function(data) {
+   get(`${baseUrl}currencies`)
+  .then(function(data) {
         let currencies = data.results
         populateSelectBoxes(currencies)
     }).catch(err => console.log(err));
@@ -42,9 +40,8 @@ function computeConversion() {
     let query = `${fromCurrency}_${toCurrency}`
     let url =  `${baseUrl}convert?q=${query}&compact=ultra`
     console.log(url)
-    fetch(url).then(function(response){
-        return response.json()
-    }).then(function(data){
+   get(url)
+  .then(function(data){
         console.log(data)
         let val = data[query]
         if (val) {
@@ -58,8 +55,50 @@ function computeConversion() {
             calculateAmount(err)
         }
     }).catch(err => {
-        console.log(err)
+        console.log("Error", err);
     })
 }
+
+if ('serviceWorker' in navigator) {
+ window.addEventListener('load', function() {
+   navigator.serviceWorker.register('./sw.js').then(function(registration) {
+     // Registration was successful
+     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+   }, function(err) {
+     // registration failed :disappointed:
+     console.log('ServiceWorker registration failed: ', err);
+   });
+ });
+}
+
+
+// Function to perform HTTP request
+var get = function(url) {
+  return new Promise(function(resolve, reject) {
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var result = xhr.responseText
+                result = JSON.parse(result);
+                resolve(result);
+            } else {
+                reject(xhr);
+            }
+        }
+    };
+    
+    xhr.open("GET", url, true);
+    xhr.send();
+
+  }); 
+};
+
+
+
+
+
+
 
 
