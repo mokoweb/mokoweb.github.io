@@ -16,6 +16,7 @@ var dbPromise = idb.open('test-db', 4, function(upgradeDb) {
   }
 });
 
+
 // read "hello" in "keyval"
 dbPromise.then(function(db) {
   var tx = db.transaction('keyval');
