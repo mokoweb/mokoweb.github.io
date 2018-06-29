@@ -32,7 +32,7 @@ let get = function(url) {
   }); 
 };
 
-
+//function to fetch the Currencies
 function fetchCurrencies() {
    get(`${baseUrl}currencies`)
   .then(function(data) {
