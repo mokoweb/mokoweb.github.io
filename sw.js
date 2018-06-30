@@ -1,8 +1,8 @@
 // Set a name for the current cache
-var cacheName = 'convert-v1'; 
+let cacheName = 'convert-v1'; 
 
 // Default files to always cache
-var cacheFiles = [
+let cacheFiles = [
 	'./',
 	'./index.html',
 	'./index.js',
@@ -72,7 +72,7 @@ self.addEventListener('fetch', function(e) {
 
 				// If the request is NOT in the cache, fetch and cache
 
-				var requestClone = e.request.clone();
+				let requestClone = e.request.clone();
 				return fetch(requestClone)
 					.then(function(response) {
 
@@ -81,7 +81,7 @@ self.addEventListener('fetch', function(e) {
 							return response;
 						}
 
-						var responseClone = response.clone();
+						let responseClone = response.clone();
 
 						//  Open the cache
 						caches.open(cacheName).then(function(cache) {

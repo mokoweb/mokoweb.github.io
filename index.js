@@ -147,7 +147,7 @@
 	
 	//show snackbar notification function
 	function mySnackBar(message) {
-    var x = document.getElementById("snackbar");
+    let x = document.getElementById("snackbar");
     x.className = "show";
 	document.getElementById("demo").innerHTML = message;
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
