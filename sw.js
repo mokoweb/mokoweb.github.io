@@ -1,5 +1,5 @@
 // Set a name for the current cache
-var cacheName = 'v1'; 
+var cacheName = 'convert-v1'; 
 
 // Default files to always cache
 var cacheFiles = [
