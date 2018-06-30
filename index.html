@@ -15,7 +15,7 @@
   <div class="inset">
   <p>
     <label for="amount">Amount</label>
-    <input type="number" name="from" id="amount">
+    <input type="number" name="from" id="amount" min="1" />
   </p>
    <p>
     <label for="fdrom">From</label>
@@ -39,8 +39,11 @@
   <p class="p-container">
 	<button type="button" id="convertButton">Convert</button>
   </p>
+  <div id="snackbar"> <p id="demo"></p></div>
 </form>
+
 </div>
+
 <script src="idb.js" /></script>
 <script src="index.js" /></script>
 <script src="sw.js" /></script>

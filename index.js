@@ -65,7 +65,10 @@
 		
 		let amount = Number(document.getElementById('amount').value);
 		
-		if(!amount) { return; }
+		if(!amount) { 
+		//put a notificatio here for the user
+					mySnackBar('Enter an Amount!');
+					return; }
 		
 		let query = `${fromCurrency}_${toCurrency}`;
 		let url =  `${baseUrl}convert?q=${query}&compact=ultra`;
@@ -109,19 +112,22 @@
 												
 											}).then(function() {
 												
-												//console.log('data added');
 												//then compute conversion
 												let total = parseFloat(val) * parseFloat(amount);
 												document.getElementById('convertedCurrency').value = total.toFixed(2);
 											});
 										} else {
-												let err = new Error("Your query resulted in an empty result, try again ");
-												console.log(err);
+												let err = new Error(`Your query: ${query} returned in an empty result, try again `);
+												//console.log(err);
+												mySnackBar(err);
+												
 											}
 									}).catch(() => {
 												//I want to display to the user, if unable to fetch result online
-												console.log("Network error please try again");
-													});
+												//console.log("Network error please try again");
+												mySnackBar("Network error please try again");// output notice to user
+												
+											});
 				} else {
 					//console.log('The value of pairs is:', value); for example {pairs: "LYD_FKP", convertRate: 0.553614}
 					
@@ -131,10 +137,18 @@
 					let total = parseFloat(rate) * parseFloat(amount);
 					
 					//console.log(total);
-					document.getElementById('convertedCurrency').value = total.toFixed(2)
+					document.getElementById('convertedCurrency').value = total.toFixed(2);
 					
 				}
 				}).catch(() => {
 				console.log("Error", err);
 				});
 	}
+	
+	//show snackbar notification function
+	function mySnackBar(message) {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+	document.getElementById("demo").innerHTML = message;
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
