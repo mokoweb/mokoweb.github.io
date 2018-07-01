@@ -44,7 +44,7 @@
 			navigator.serviceWorker.register('./sw.js').then(function(registration) {
 				// Registration was successful
 				console.log('ServiceWorker registration successful with scope: ', registration.scope);
-			}, function(err) {
+			}, (err) =>{
 				// log to console if registration failed
 				console.log('ServiceWorker registration failed: ', err);
 			});
@@ -52,7 +52,7 @@
 	}
 	
 	//for indexDB
-	let dbPromise = idb.open('convert-db', 4, function(upgradeDb) {
+	let dbPromise = idb.open('convert-db', 4, (upgradeDb) =>{
 			
 		let rateStore = upgradeDb.createObjectStore('rates', {
 			keyPath: 'pairs'
@@ -74,25 +74,24 @@
 		let url =  `${baseUrl}convert?q=${query}&compact=ultra`;
 	
 		//check if value is in the DB
-		dbPromise.then(function(db) {
+		dbPromise.then((db) =>{
 			let tx = db.transaction('rates', 'readwrite');
 			let rateStore = tx.objectStore('rates');
 			
 			//console.log('i am query', query);
 			return rateStore.get(query); 
-		}).then(function(value) {
+		}).then((value) =>{
 			
 				if (value === undefined || value === null) {
 				fetch(url)  
-				.then(  
-					function(response) {  
+				.then((response) =>{  
 						if (response.status !== 200) {  
 							console.warn('Looks like there was a problem. Status Code: ' + response.status);  
 							return;  
 						}
 						
 						return response.json();
-						}).then(function(data){
+						}).then((data) =>{
 								
 									let val = data[query];
 									
@@ -100,7 +99,7 @@
 										
 											//create transaction
 											//store the value
-											dbPromise.then(function(db) {
+											dbPromise.then((db) =>{
 												let tx = db.transaction('rates', 'readwrite');
 												let rateStore = tx.objectStore('rates');
 												
@@ -110,7 +109,7 @@
 												});
 												return tx.complete;
 												
-											}).then(function() {
+											}).then(()=> {
 												
 												//then compute conversion
 												let total = parseFloat(val) * parseFloat(amount);
@@ -150,5 +149,5 @@
     let x = document.getElementById("snackbar");
     x.className = "show";
 	document.getElementById("demo").innerHTML = message;
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    setTimeout(()=>{ x.className = x.className.replace("show", ""); }, 3000);
 }
