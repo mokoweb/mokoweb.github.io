@@ -16,7 +16,7 @@
 					
 				let currencies = data.results;
 				//console.log(currencies);
-				populateSelectBoxes(currencies.sort());
+				populateSelectBoxes(currencies);
 				})})
 				.catch(err => console.log(err));
 	}
