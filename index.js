@@ -15,7 +15,7 @@
 				response.json().then((data) =>{
 					
 				let currencies = data.results;
-				console.log(currencies);
+				//console.log(currencies);
 				populateSelectBoxes(currencies.sort());
 				})})
 				.catch(err => console.log(err));
