@@ -4,19 +4,19 @@
 
 	let currencyTo = document.getElementById('currto');
 
-	const baseUrl = 'https://free.currencyconverterapi.com/api/v5/';
+	const baseUrl = 'https://free.currconv.com/api/v7/';
 
 	document.getElementById('convertButton').addEventListener('click', computeConversion);
 
 	function fetchCurrencies() {
-		fetch(`${baseUrl}currencies`)
+		fetch(`${baseUrl}currencies?apiKey=f28c3dd2ebb5c826e0fb`)
 		
 			.then((response)=>{
 				response.json().then((data) =>{
 					
 				let currencies = data.results;
-				
-				populateSelectBoxes(currencies);
+				console.log(currencies);
+				populateSelectBoxes(currencies.sort());
 				})})
 				.catch(err => console.log(err));
 	}
@@ -71,7 +71,7 @@
 					return; }
 		
 		let query = `${fromCurrency}_${toCurrency}`;
-		let url =  `${baseUrl}convert?q=${query}&compact=ultra`;
+		let url =  `${baseUrl}convert?q=${query}&compact=ultra&apiKey=f28c3dd2ebb5c826e0fb`;
 	
 		//check if value is in the DB
 		dbPromise.then((db) =>{
