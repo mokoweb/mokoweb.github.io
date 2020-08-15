@@ -9,7 +9,7 @@
 	document.getElementById('convertButton').addEventListener('click', computeConversion);
 
 	function fetchCurrencies() {
-		fetch(`${baseUrl}currencies?apiKey=f28c3dd2ebb5c826e0fb`)
+		fetch(`${baseUrl}currencies?apiKey=c655a3398aa19d721889`)
 		
 			.then((response)=>{
 				response.json().then((data) =>{
